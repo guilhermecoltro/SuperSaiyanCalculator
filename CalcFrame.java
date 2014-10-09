@@ -1,12 +1,14 @@
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 
-public class CalcFrame extends JFrame{
+public class CalcFrame extends JFrame implements KeyListener{
 
 	public GridBagConstraints c = new GridBagConstraints();
 	public JPanel panel = new JPanel();
 	
-	public JTextField visor = new JTextField();
+	final static JTextField visor = new JTextField();
+	final static double mem = 0;
 
 	public JLabel base = new JLabel("Base: 10");
 	public JButton bin = new JButton("Bin");
@@ -55,6 +57,7 @@ public class CalcFrame extends JFrame{
 	*/
 	public CalcFrame(){
 		this.initComponents();
+		this.requestFocus();
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.pack();
@@ -69,11 +72,13 @@ public class CalcFrame extends JFrame{
 		this.getContentPane().add(this.panel);
 		this.addLayoutToPane(this.panel, this.c);
 
+		this.initListeners();
 		this.initVisor();
 		this.initKeyboard();
 	}
 
 	public void initVisor(){
+		this.visor.setEditable(false);
 		this.visor.setHorizontalAlignment(JTextField.RIGHT);
 		this.c.gridwidth = 10;
 		this.c.fill = GridBagConstraints.HORIZONTAL;
@@ -272,4 +277,149 @@ public class CalcFrame extends JFrame{
 		c.weightx = 0.5;
 	}
 
+	public void initListeners(){
+		/* JButtons Listener */
+			/* Numbers */
+		zero.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				CalcFrame.visor.setText(CalcFrame.visor.getText()+"0");
+			}
+		});
+		one.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				CalcFrame.visor.setText(CalcFrame.visor.getText()+"1");
+			}
+		});
+		two.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				CalcFrame.visor.setText(CalcFrame.visor.getText()+"2");
+			}
+		});
+		tree.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				CalcFrame.visor.setText(CalcFrame.visor.getText()+"3");
+			}
+		});
+		four.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				CalcFrame.visor.setText(CalcFrame.visor.getText()+"4");
+			}
+		});
+		five.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				CalcFrame.visor.setText(CalcFrame.visor.getText()+"5");
+			}
+		});
+		six.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				CalcFrame.visor.setText(CalcFrame.visor.getText()+"6");
+			}
+		});
+		seven.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				CalcFrame.visor.setText(CalcFrame.visor.getText()+"7");
+			}
+		});
+		eight.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				CalcFrame.visor.setText(CalcFrame.visor.getText()+"8");
+			}
+		});
+		nine.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				CalcFrame.visor.setText(CalcFrame.visor.getText()+"9");
+			}
+		});
+
+			/* Aritméticas */
+		soma.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				CalcFrame.visor.setText(CalcFrame.visor.getText()+" + ");
+			}
+		});
+
+		sub.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				CalcFrame.visor.setText(CalcFrame.visor.getText()+" - ");
+			}
+		});
+
+		mult.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				CalcFrame.visor.setText(CalcFrame.visor.getText()+"*");
+			}
+		});
+
+		div.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				CalcFrame.visor.setText(CalcFrame.visor.getText()+"/");
+			}
+		});
+	}
+
+	/* Interface KeyListener */
+	@Override
+	public void keyPressed(KeyEvent e){
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e){
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e){
+		System.out.println("KeyTyped");
+	}
+
+	/* Teste */
+	public static void main(String[] args){
+		CalcFrame cf = new CalcFrame();
+		
+	}
+
 }
+
+/*
+public JLabel base = new JLabel("Base: 10");
+public JButton bin = new JButton("Bin");
+public JButton hex = new JButton("Hexa");
+public JButton oct = new JButton("Oct");
+public JButton radians = new JButton("Radiano");
+public JButton sec = new JButton("Sec x");
+public JButton cossec = new JButton("Cossec x");
+public JButton cotg = new JButton("Cotg x");
+public JButton degrees = new JButton("Degrees");
+public JButton sin = new JButton("Sen x");
+public JButton cos = new JButton("Cos x");
+public JButton tg = new JButton("Tg x");
+public JButton module = new JButton("|x|");
+public JButton fat = new JButton("x!");
+public JButton logdez = new JButton("Log(10) x");
+public JButton log = new JButton("Log(n) x");
+public JButton pow2 = new JButton("x²");
+public JButton pow3 = new JButton("x³");
+public JButton pown = new JButton("x^n");
+public JButton back = new JButton("←");
+public JButton sqrt2 = new JButton("(2)√x");
+public JButton sqrt3 = new JButton("(3)√x");
+public JButton sqrtn = new JButton("(n)√x");
+public JButton clear = new JButton("C");
+public JButton zero = new JButton("0");
+public JButton one = new JButton("1");
+public JButton two = new JButton("2");
+public JButton tree = new JButton("3");
+public JButton four = new JButton("4");
+public JButton five = new JButton("5");
+public JButton six = new JButton("6");
+public JButton seven = new JButton("7");
+public JButton eight = new JButton("8");
+public JButton nine = new JButton("9");
+public JButton dot = new JButton(".");
+public JButton equal = new JButton("=");
+public JButton soma = new JButton("+");
+public JButton sub = new JButton("-");
+public JButton mult = new JButton("*");
+public JButton div = new JButton("/");
+*/
