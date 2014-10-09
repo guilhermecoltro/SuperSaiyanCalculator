@@ -272,8 +272,4 @@ public class CalcFrame extends JFrame{
 		c.weightx = 0.5;
 	}
 
-	public static void main(String[] args){
-		CalcFrame cf = new CalcFrame();
-	}
-
 }
